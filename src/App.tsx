@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Project, ProjectKind, Update, Workspace } from './domain';
-import { canSign, createProject, dateLabel, editProject, isSigned, kindLabels, log, pendingFor, readiness, statusLabels } from './domain';
+import { canSign, createProject, dateLabel, editProject, isSigned, kindLabels, log, readiness, statusLabels } from './domain';
 import { saveWorkspace, validWorkspace } from './storage';
 import { exportBackup, exportReport } from './report';
 import { ActivityList, Avatar, Badge, Button, Empty, Field, Icon, IconButton, IssueBadge, Logo, Modal, PageHeader, PriorityMark, ProjectBadge, ProjectCover, SubmitForm } from './ui';
