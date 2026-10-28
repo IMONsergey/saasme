@@ -1,5 +1,5 @@
-import { useEffect, useId, useRef } from 'react';
-import type { ReactNode, ButtonHTMLAttributes, FormEvent } from 'react';
+import { cloneElement, isValidElement, useEffect, useId, useRef } from 'react';
+import type { ReactNode, ReactElement, ButtonHTMLAttributes, FormEvent } from 'react';
 import type { Issue, Project, Workspace } from './domain';
 import { currentVersion, dateLabel, priorityLabels, projectStatus, statusLabels } from './domain';
 export type IconName = 'grid' | 'folder' | 'check' | 'message' | 'tool' | 'settings' | 'search' | 'plus' | 'arrow' | 'chevron' | 'close' | 'clock' | 'upload' | 'download' | 'monitor' | 'mobile' | 'layers' | 'link' | 'external' | 'list' | 'bell' | 'help' | 'eye' | 'menu' | 'archive' | 'flag' | 'back' | 'compare' | 'pin' | 'undo' | 'file' | 'spark' | 'lock';
@@ -60,7 +60,12 @@ export function Modal({ title, children, onClose, wide = false }: { title: strin
   }, [onClose]);
   return <div className="modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}><div ref={ref} role="dialog" aria-modal="true" aria-labelledby={id} className={`modal ${wide ? 'modal-wide' : ''}`}><header><h2 id={id}>{title}</h2><IconButton icon="close" label="Закрыть окно" onClick={onClose}/></header><div className="modal-body">{children}</div></div></div>;
 }
-export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string }) { return <label className="field"><span>{label}</span>{children}{hint && <small>{hint}</small>}</label>; }
+export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string }) {
+  const id = useId();
+  const control = isValidElement(children) ? children as ReactElement<{ 'aria-label'?: string; 'aria-labelledby'?: string; 'aria-describedby'?: string }> : undefined;
+  const labelled = control && !control.props['aria-label'] && !control.props['aria-labelledby'] ? cloneElement(control, { 'aria-labelledby': id, ...(hint ? { 'aria-describedby': `${id}-hint` } : {}) }) : children;
+  return <label className="field"><span id={id}>{label}</span>{labelled}{hint && <small id={`${id}-hint`}>{hint}</small>}</label>;
+}
 export function PageHeader({ eyebrow, title, text, action }: { eyebrow?: string; title: string; text?: string; action?: ReactNode }) { return <div className="page-heading"><div>{eyebrow && <span className="eyebrow">{eyebrow}</span>}<h1>{title}</h1>{text && <p>{text}</p>}</div>{action && <div className="heading-actions">{action}</div>}</div>; }
 export function ProjectCover({ project, compact = false }: { project: Project; compact?: boolean }) {
   const image = project.screens[0]?.reference || (project.screens[0] && currentVersion(project.screens[0])?.image);

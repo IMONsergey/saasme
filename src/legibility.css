@@ -1,0 +1,103 @@
+/* Text contrast and control sizing are kept separate from layout geometry. */
+@layer legibility {
+  :root { --muted: #697163; }
+  .page-heading p, .workspace-switch small, .sidebar-caption, .profile small,
+  .workspace-note > span:not(.note-symbol):not(.text-link), .metric > div > span,
+  .metric small, .card-meta > span:first-child, .progress-label, .card-bottom,
+  .queue-title small, .activity-item small, .tool-banner p, .review-callout p,
+  .review-callout .eyebrow, .app-footer, .screen-card-body > div > span,
+  .overview-info > span:not(.badge), .overview-progress > span,
+  .field > span, .field small, .input-label, .issue-detail-heading p,
+  .issue-detail-meta, .comment p, .comment b small, .notice p,
+  .integration-row small, .client-description, .client-summary span,
+  .client-screen > div:last-child > span:not(.badge), .client-sign-panel p,
+  .client-footnote, .client-notice, .tool-card-content p, .tool-next p,
+  .drop-zone p, .drop-zone small, .preflight-summary > span, .file-result small,
+  .file-problems, .case-client, .case-preview > div > p, .small-muted,
+  .review-project small, .review-screen-title, .rail-title, .rail-screen small,
+  .canvas-info, .canvas-footer, .review-issue-card p, .review-issue-card footer,
+  .review-tip, .review-empty p, .issue-row-name small, .issue-assignee,
+  .command-results small, .image-input small, .issue-search, .search-trigger,
+  .breadcrumb, .panel-link, .section-heading .text-link {
+    color: #697163;
+  }
+  .nav-item { font-size: 13px; }
+  .sidebar-caption, .workspace-switch small, .profile small { font-size: 10px; }
+  .workspace-switch b, .profile b, .workspace-note strong { font-size: 12px; }
+  .workspace-note > span:not(.note-symbol):not(.text-link) { font-size: 11px; }
+  .pinned-projects a { font-size: 12px; }
+  .btn { font-size: 12px; }
+  .page-heading p { font-size: 13px; }
+  .metric > div > span { font-size: 12px; }
+  .metric small { font-size: 11px; line-height: 1.5; }
+  .card-meta > span:first-child, .card-meta .badge { font-size: 10px; }
+  .project-card h3 { font-size: 14px; line-height: 1.45; min-height: 41px; }
+  .progress-label, .progress-label b, .card-bottom { font-size: 10px; }
+  .queue-title b { font-size: 12px; }
+  .queue-title small, .queue-row .badge { font-size: 10px; }
+  .activity-item p { font-size: 12px; }
+  .activity-item small { font-size: 10px; }
+  .section-heading .text-link, .panel-link { font-size: 11px; }
+  .tool-banner h3 { font-size: 13px; }
+  .tool-banner p, .review-callout p { font-size: 11px; }
+  .review-callout .btn { font-size: 11px; }
+  .field > span, .input-label { font-size: 12px; }
+  .field small { font-size: 11px; }
+  .badge-green { color: #526b29; }
+  .badge-orange { color: #885923; }
+  .badge-blue { color: #4e6384; }
+  .badge-purple { color: #715480; }
+  .badge-gray { color: #666d60; }
+  .tabs > button { font-size: 12px; color: #6c775f; }
+  .screen-card-body h3 { font-size: 14px; }
+  .screen-card-body > div > span { font-size: 11px; }
+  .review-issue-card h3 { font-size: 12px; color: #404c35; }
+  .review-issue-card p { font-size: 11px; }
+  .review-issue-card footer, .review-issue-card .badge { font-size: 10px; }
+  .review-tip p, .review-empty p { font-size: 11px; }
+  .rail-screen b { font-size: 11px; }
+  .rail-screen small, .canvas-info, .canvas-footer { font-size: 10px; }
+  .canvas-content figcaption { color: #566447; font-size: 10px; }
+  .canvas-content figcaption select { font-size: 10px; color: #566447; }
+  .mode-switch > button { font-size: 12px; color: #657650; }
+  .range-control { color: #64744f; }
+  .issue-row-name b { font-size: 13px; }
+  .issue-row-name small { font-size: 11px; }
+  .notice p { font-size: 12px; }
+  .client-footnote, .client-notice { font-size: 11px; }
+  .tool-card-content p, .case-preview > div > p { font-size: 13px; }
+  .tool-next p { font-size: 12px; }
+  .file-result b { font-size: 12px; }
+  .file-result small, .file-problems { font-size: 11px; }
+  .app-footer { font-size: 10px; }
+  @media (max-width: 1250px) {
+    .project-card h3 { font-size: 13px; }
+    .metric > div > span { font-size: 11px; }
+    .metric small { font-size: 10px; }
+  }
+  @media (max-width: 760px) {
+    .page-heading p { font-size: 12px; }
+    .project-card h3 { font-size: 13px; }
+    .card-meta { align-items: flex-start; }
+    .card-meta > span:first-child, .card-meta .badge { font-size: 9px; }
+    .card-bottom { gap: 4px; font-size: 9px; }
+    .queue-row { align-items: flex-start; }
+    .queue-row > .badge { margin-top: 3px; }
+    .queue-title b { font-size: 12px; }
+    .queue-title small { font-size: 10px; }
+    .review-callout .btn { font-size: 10px; }
+    .activity-panel h2 { font-size: 14px; }
+    .activity-item p { font-size: 12px; }
+    .tabs > button { font-size: 11px; }
+    .canvas-content figcaption { font-size: 9px; min-height: 55px; }
+    .canvas-content figcaption select { font-size: 9px; }
+    .mode-switch > button { font-size: 11px; }
+    .rail-screen b, .rail-screen small { font-size: 10px; }
+    .screen-card-body > div > span { font-size: 10px; }
+    .client-header .back-link { font-size: 10px; }
+    .client-notice { font-size: 10px; }
+    .notice p { font-size: 11px; }
+    .file-result .file-problems { font-size: 10px; }
+    .app-footer { font-size: 9px; }
+  }
+}

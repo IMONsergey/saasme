@@ -23,7 +23,7 @@ export default function App({ initial }: { initial: Workspace }) {
   const [focusIssue, setFocusIssue] = useState<string | null>(null);
   const [page = '', projectId, screenId] = useRoute();
   const notify = useCallback((text: string) => { clearTimeout(timer.current); setToast(text); timer.current = setTimeout(() => setToast(''), 4500); }, []);
-  const update = useCallback<Update>(recipe => { try { const next = recipe(stateRef.current); stateRef.current = next; setState(next); } catch (error) { notify(error instanceof Error ? error.message : 'Не удалось выполнить действие.'); } }, [notify]);
+  const update = useCallback<Update>(recipe => { try { const next = recipe(stateRef.current); setSaved('Сохраняем…'); stateRef.current = next; setState(next); } catch (error) { notify(error instanceof Error ? error.message : 'Не удалось выполнить действие.'); } }, [notify]);
   useEffect(() => { let current = true; setSaved('Сохраняем…'); saveWorkspace(state).then(() => { if (current) { setSaved('Сохранено'); setStorageError(''); } }).catch(error => { if (current) { setSaved('Ошибка сохранения'); setStorageError(error.message); } }); return () => { current = false; }; }, [state]);
   useEffect(() => { setMobileMenu(false); setFocusIssue(null); }, [page, projectId, screenId]);
   useEffect(() => { function key(e: KeyboardEvent) { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setModal(m => m === 'search' ? null : 'search'); } } window.addEventListener('keydown', key); return () => { window.removeEventListener('keydown', key); clearTimeout(timer.current); }; }, []);
@@ -45,7 +45,7 @@ export default function App({ initial }: { initial: Workspace }) {
         {page === 'issues' && <Issues state={state} onOpen={setFocusIssue}/>}
         {page === 'tools' && <Tools {...common} tool={projectId}/>}
         {page === 'activity' && <><PageHeader eyebrow="ПРОЗРАЧНЫЙ ПРОЦЕСС" title="История изменений" text="Версии, замечания и решения по всем проектам."/><section className="panel history-page"><ActivityList state={state} limit={200}/></section></>}
-        {page === 'settings' && <Settings {...common}/>}
+        {page === 'settings' && <Settings key={`${state.studio}:${state.person}`} {...common}/>}
         {page === 'project' && project && <ProjectView {...common} project={project}/>}
         {page === 'review' && project && <ReviewView {...common} project={project} screenId={screenId}/>}
         {page === 'client' && project && <ClientView {...common} project={project}/>}

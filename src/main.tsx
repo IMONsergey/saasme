@@ -6,6 +6,7 @@ import { createDemo } from './demo';
 import type { Workspace } from './domain';
 import { loadWorkspace } from './storage';
 import './styles.css';
+import './legibility.css';
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean }> {
   state = { error: false };
   static getDerivedStateFromError() { return { error: true }; }
